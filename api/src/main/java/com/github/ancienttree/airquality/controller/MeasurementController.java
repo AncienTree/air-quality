@@ -1,6 +1,8 @@
 package com.github.ancienttree.airquality.controller;
 
 
+import com.github.ancienttree.airquality.dto.ApiResponse;
+import com.github.ancienttree.airquality.dto.CreateMeasurementResponse;
 import com.github.ancienttree.airquality.dto.MeasurementRequestDTO;
 import com.github.ancienttree.airquality.service.MeasurementService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,8 +26,9 @@ public class MeasurementController {
 
     @PostMapping
     @Operation(summary = "Create measurement entry")
-    public ResponseEntity<Void> createMeasurement(@RequestBody @Valid MeasurementRequestDTO request) {
-        measurementService.save(request);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<ApiResponse<CreateMeasurementResponse>> createMeasurement(@RequestBody @Valid MeasurementRequestDTO request) {
+        Long id = measurementService.save(request);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.created(new CreateMeasurementResponse(id)));
     }
 }

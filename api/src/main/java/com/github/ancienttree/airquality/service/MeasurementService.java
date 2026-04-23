@@ -13,11 +13,12 @@ public class MeasurementService {
     private final MeasurementRepository measurementRepository;
     private final CityService cityService;
 
-    public void save(MeasurementRequestDTO dto) {
+    public Long save(MeasurementRequestDTO dto) {
         // Save city if not exists
         cityService.getOrCreateCity(dto.cityId());
 
         Measurement measurement = Measurement.map(dto);
-        measurementRepository.save(measurement);
+        Measurement saved = measurementRepository.save(measurement);
+        return saved.getId();
     }
 }
