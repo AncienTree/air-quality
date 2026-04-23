@@ -14,3 +14,7 @@ spring:
 
   flyway:
     enabled: true
+
+external:
+  city:
+    url: https://api.europeancitiesdictionary.info
