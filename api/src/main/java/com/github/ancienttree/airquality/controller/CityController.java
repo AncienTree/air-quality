@@ -3,6 +3,8 @@ package com.github.ancienttree.airquality.controller;
 
 import com.github.ancienttree.airquality.dto.ApiResponse;
 import com.github.ancienttree.airquality.dto.CityResponse;
+import com.github.ancienttree.airquality.dto.CityStatsDto;
+import com.github.ancienttree.airquality.dto.enums.TimeRange;
 import com.github.ancienttree.airquality.service.CityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,5 +34,12 @@ public class CityController {
     public ResponseEntity<ApiResponse<List<String>>> getAllRegions() {
         List<String> cites = cityService.getAllRegions();
         return ResponseEntity.ok(ApiResponse.ok(cites));
+    }
+
+    @GetMapping("/stats/{range}")
+    @Operation(summary = "Get city statistics for given time range")
+    public ResponseEntity<ApiResponse<List<CityStatsDto>>> getCityStatistic(@PathVariable TimeRange range) {
+        List<CityStatsDto> stats = cityService.getStatistics(range);
+        return ResponseEntity.ok(ApiResponse.ok(stats));
     }
 }

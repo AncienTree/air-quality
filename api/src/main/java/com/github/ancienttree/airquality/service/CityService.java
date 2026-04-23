@@ -2,6 +2,8 @@ package com.github.ancienttree.airquality.service;
 
 import com.github.ancienttree.airquality.client.CityClient;
 import com.github.ancienttree.airquality.dto.CityResponse;
+import com.github.ancienttree.airquality.dto.CityStatsDto;
+import com.github.ancienttree.airquality.dto.enums.TimeRange;
 import com.github.ancienttree.airquality.mapper.CityMapper;
 import com.github.ancienttree.airquality.model.City;
 import com.github.ancienttree.airquality.repository.CityRepository;
@@ -9,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -38,5 +43,16 @@ public class CityService {
 
     public List<String> getAllRegions() {
         return cityRepository.getAllRegions();
+    }
+
+
+    public List<CityStatsDto> getStatistics(TimeRange range) {
+        log.info("Start fetching city statistics for range {}", range);
+        Instant from = switch (range) {
+            case H1 -> Instant.now().minus(1, ChronoUnit.HOURS);
+            case H24 -> Instant.now().minus(24, ChronoUnit.HOURS);
+            case M3 -> Instant.now().minus(3, ChronoUnit.MONTHS);
+        };
+        return cityRepository.getCityStatisticsByRange(from);
     }
 }
