@@ -7,7 +7,7 @@ export function MainLayout() {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <AppHeader />
 
-      <main style={{ flex: 1 }}>
+      <main style={{ flex: 1, backgroundColor: '#f0f0f0' }}>
         <Outlet />
       </main>
 
