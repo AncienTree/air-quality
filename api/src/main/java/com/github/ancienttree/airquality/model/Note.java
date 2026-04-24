@@ -41,4 +41,10 @@ public class Note {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+        this.updatedAt = Instant.now();
+    }
 }

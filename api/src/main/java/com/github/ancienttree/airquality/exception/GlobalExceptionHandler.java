@@ -1,6 +1,7 @@
 package com.github.ancienttree.airquality.exception;
 
 import com.github.ancienttree.airquality.dto.ApiResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,7 +31,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ApiResponse<Void>> handleTypeMismatch (MethodArgumentTypeMismatchException ex) {
+    public ResponseEntity<ApiResponse<Void>> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
         String param = ex.getName();
         String value = String.valueOf(ex.getValue());
         String reqType = ex.getRequiredType() != null ? ex.getRequiredType().getSimpleName() : "UNK";
@@ -38,5 +39,11 @@ public class GlobalExceptionHandler {
         String message = String.format("Invalid value '%s' for parameter '%s'. Expected type: %s",
                 value, param, reqType);
         return ResponseEntity.badRequest().body(new ApiResponse<>(null, message));
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ApiResponse<Void>> handleNotFound(NotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ApiResponse<>(null, ex.getMessage()));
     }
 }

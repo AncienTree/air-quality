@@ -2,7 +2,7 @@ package com.github.ancienttree.airquality.service;
 
 import com.github.ancienttree.airquality.client.CityClient;
 import com.github.ancienttree.airquality.dto.CityResponse;
-import com.github.ancienttree.airquality.dto.CityStatsDto;
+import com.github.ancienttree.airquality.dto.CityStatsResponse;
 import com.github.ancienttree.airquality.dto.enums.TimeRange;
 import com.github.ancienttree.airquality.mapper.CityMapper;
 import com.github.ancienttree.airquality.model.City;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -46,7 +45,7 @@ public class CityService {
     }
 
 
-    public List<CityStatsDto> getStatistics(TimeRange range) {
+    public List<CityStatsResponse> getStatistics(TimeRange range) {
         log.info("Start fetching city statistics for range {}", range);
         Instant from = switch (range) {
             case H1 -> Instant.now().minus(1, ChronoUnit.HOURS);

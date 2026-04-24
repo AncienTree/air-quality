@@ -1,6 +1,6 @@
 package com.github.ancienttree.airquality.repository;
 
-import com.github.ancienttree.airquality.dto.CityStatsDto;
+import com.github.ancienttree.airquality.dto.CityStatsResponse;
 import com.github.ancienttree.airquality.model.City;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +15,7 @@ public interface CityRepository extends JpaRepository<City, String> {
     List<String> getAllRegions();
 
     @Query("""
-        SELECT new com.github.ancienttree.airquality.dto.CityStatsDto(
+        SELECT new com.github.ancienttree.airquality.dto.CityStatsResponse(
             m.cityId, c.country,
             AVG(m.no2), MAX(m.no2), MIN(m.no2),
             AVG(m.co), MAX(m.co), MIN(m.co),
@@ -26,5 +26,5 @@ public interface CityRepository extends JpaRepository<City, String> {
         WHERE m.measuredAt >= :from
         GROUP BY m.cityId, c.country
 """)
-    List<CityStatsDto> getCityStatisticsByRange(Instant from);
+    List<CityStatsResponse> getCityStatisticsByRange(Instant from);
 }

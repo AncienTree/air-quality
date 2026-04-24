@@ -1,6 +1,6 @@
 package com.github.ancienttree.airquality.model;
 
-import com.github.ancienttree.airquality.dto.MeasurementRequestDTO;
+import com.github.ancienttree.airquality.dto.MeasurementRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +33,7 @@ public class Measurement {
     @Column(name = "measured_at")
     private Instant measuredAt;
 
-    public static Measurement map(MeasurementRequestDTO dto) {
+    public static Measurement map(MeasurementRequest dto) {
         Measurement m = new Measurement();
 
         m.sensorId = dto.sensorId();

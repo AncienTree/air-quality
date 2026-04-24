@@ -3,7 +3,7 @@ package com.github.ancienttree.airquality.controller;
 
 import com.github.ancienttree.airquality.dto.ApiResponse;
 import com.github.ancienttree.airquality.dto.CreateMeasurementResponse;
-import com.github.ancienttree.airquality.dto.MeasurementRequestDTO;
+import com.github.ancienttree.airquality.dto.MeasurementRequest;
 import com.github.ancienttree.airquality.service.MeasurementService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/measurement")
+@RequestMapping("/api/measurements")
 @Tag(name = "Measurement", description = "Insert operation for measurement entities")
 @RequiredArgsConstructor
 public class MeasurementController {
@@ -26,7 +26,7 @@ public class MeasurementController {
 
     @PostMapping
     @Operation(summary = "Create measurement entry")
-    public ResponseEntity<ApiResponse<CreateMeasurementResponse>> createMeasurement(@RequestBody @Valid MeasurementRequestDTO request) {
+    public ResponseEntity<ApiResponse<CreateMeasurementResponse>> createMeasurement(@RequestBody @Valid MeasurementRequest request) {
         Long id = measurementService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.created(new CreateMeasurementResponse(id)));

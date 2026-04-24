@@ -1,6 +1,6 @@
 package com.github.ancienttree.airquality.dto;
 
-public record CityStatsDto(
+public record CityStatsResponse(
         String cityId,
         String country,
 
