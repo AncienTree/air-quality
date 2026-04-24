@@ -1,0 +1,12 @@
+.footer {
+  margin-top: 60px;
+  border-top: 1px solid var(--mantine-color-gray-3);
+  padding: 20px 0;
+  background-color: var(--mantine-color-body);
+}
+
+.inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
