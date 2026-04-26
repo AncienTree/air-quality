@@ -29,13 +29,6 @@ public class CityController {
         return ResponseEntity.ok(ApiResponse.ok(cites));
     }
 
-    @GetMapping("/regions")
-    @Operation(summary = "Get all unique region list")
-    public ResponseEntity<ApiResponse<List<String>>> getAllRegions() {
-        List<String> cites = cityService.getAllRegions();
-        return ResponseEntity.ok(ApiResponse.ok(cites));
-    }
-
     @GetMapping("/stats/{range}")
     @Operation(summary = "Get city statistics for given time range")
     public ResponseEntity<ApiResponse<List<CityStatsResponse>>> getCityStatistic(@PathVariable TimeRange range) {

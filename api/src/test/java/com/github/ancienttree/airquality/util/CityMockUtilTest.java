@@ -1,6 +1,6 @@
 package com.github.ancienttree.airquality.util;
 
-import com.github.ancienttree.airquality.dto.CityResponse;
+import com.github.ancienttree.airquality.dto.CityMockResponse;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,30 +11,34 @@ public class CityMockUtilTest {
     void shouldReturnSameCityForSameId() {
         String cityId = "123";
 
-        CityResponse first = CityMockUtil.mockCity(cityId);
-        CityResponse second = CityMockUtil.mockCity(cityId);
+        CityMockResponse first = CityMockUtil.mockCity(cityId);
+        CityMockResponse second = CityMockUtil.mockCity(cityId);
 
         assertThat(first).isEqualTo(second);
     }
 
     @Test
     void shouldReturnValidRegion() {
-        CityResponse response = CityMockUtil.mockCity("abc");
-
+        CityMockResponse response = CityMockUtil.mockCity("abc");
         assertThat(response.region())
-                .isIn("Polska", "Niemcy", "Francja", "Czechy");
+                .isIn(
+                        "Śląskie", "Mazowieckie", "Małopolskie", "Dolnośląskie",
+                        "Bavaria", "North Rhine-Westphalia", "Baden-Wurttemberg", "Saxony",
+                        "Ile-de-France", "Provence-Alpes-Cote d'Azur", "Auvergne-Rhone-Alpes", "Nouvelle-Aquitaine",
+                        "Central Bohemian", "South Moravian", "Moravian-Silesian", "Pilsen Region"
+                );
     }
 
     @Test
     void shouldReturnValidCountryCode() {
-        CityResponse response = CityMockUtil.mockCity("xyz");
+        CityMockResponse response = CityMockUtil.mockCity("xyz");
         assertThat(response.country())
-                .isIn("PL", "DE", "FR", "CZ");
+                .isIn("Polska", "Niemcy", "Francja", "Czechy");
     }
 
     @Test
     void shouldGenerateRegionId() {
-        CityResponse response = CityMockUtil.mockCity("1");
+        CityMockResponse response = CityMockUtil.mockCity("1");
 
         assertThat(response.regionId())
                 .isNotBlank()

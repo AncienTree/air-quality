@@ -1,6 +1,7 @@
 package com.github.ancienttree.airquality.repository;
 
 import com.github.ancienttree.airquality.dto.CityStatsResponse;
+import com.github.ancienttree.airquality.dto.RegionResponse;
 import com.github.ancienttree.airquality.model.City;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,9 +12,6 @@ import java.util.List;
 
 @Repository
 public interface CityRepository extends JpaRepository<City, String> {
-    @Query("SELECT DISTINCT c.region FROM City c")
-    List<String> getAllRegions();
-
     @Query("""
         SELECT new com.github.ancienttree.airquality.dto.CityStatsResponse(
             m.cityId, c.country,

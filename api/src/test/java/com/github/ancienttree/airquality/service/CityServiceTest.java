@@ -9,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.Instant;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
@@ -23,20 +22,6 @@ public class CityServiceTest {
 
     @InjectMocks
     private CityService cityService;
-
-    @Test
-    void shouldGetAllRegions() {
-        // Given
-        when(cityRepository.getAllRegions())
-                .thenReturn(List.of("Region1", "Region2"));
-
-        // When
-        List<String> regions = cityService.getAllRegions();
-
-        // Then
-        assertThat(regions).containsExactlyInAnyOrder("Region1", "Region2");
-        verify(cityRepository).getAllRegions();
-    }
 
     @Test
     void shouldReturnEmptyListWhenNoData() {

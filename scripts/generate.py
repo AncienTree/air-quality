@@ -14,12 +14,7 @@ RANGES = {
 }
 
 # Fake city IDs for demonstration purposes
-CITY_IDS = [
-    "city-1", "city-2", "city-3", "city-4",
-    "city-5", "city-6", "city-7", "city-8",
-    "city-9", "city-10", "city-11", "city-12",
-    "city-13", "city-14", "city-15", "city-16",
-]
+CITY_IDS = [f"city-{i}" for i in range(1, 51)]
 
 
 # Function to generate a random timestamp within the specified range

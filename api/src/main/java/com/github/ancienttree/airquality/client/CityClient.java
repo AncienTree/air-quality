@@ -1,6 +1,6 @@
 package com.github.ancienttree.airquality.client;
 
-import com.github.ancienttree.airquality.dto.CityResponse;
+import com.github.ancienttree.airquality.dto.CityMockResponse;
 import com.github.ancienttree.airquality.util.CityMockUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,13 +22,13 @@ public class CityClient {
      * Therefore, we always fall back to a deterministic mock implementation
      * instead of relying on real network responses.
      */
-    public CityResponse fetchCityFromExternal(String cityId) {
+    public CityMockResponse fetchCityFromExternal(String cityId) {
         log.info("Fetching city: {}", cityId);
 
         return webClient.get()
                 .uri("/cities/{id}", cityId)
                 .retrieve()
-                .bodyToMono(CityResponse.class)
+                .bodyToMono(CityMockResponse.class)
                 .onErrorResume(ex -> {
                     log.error("Error calling API. Mocking response for cityId={}", cityId);
                     return Mono.just(mockResponse(cityId));
@@ -36,7 +36,7 @@ public class CityClient {
                 .block();
     }
 
-    private CityResponse mockResponse(String cityId) {
+    private CityMockResponse mockResponse(String cityId) {
         return CityMockUtil.mockCity(cityId);
     }
 }

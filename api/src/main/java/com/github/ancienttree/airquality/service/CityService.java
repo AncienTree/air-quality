@@ -1,6 +1,7 @@
 package com.github.ancienttree.airquality.service;
 
 import com.github.ancienttree.airquality.client.CityClient;
+import com.github.ancienttree.airquality.dto.CityMockResponse;
 import com.github.ancienttree.airquality.dto.CityResponse;
 import com.github.ancienttree.airquality.dto.CityStatsResponse;
 import com.github.ancienttree.airquality.dto.enums.TimeRange;
@@ -28,7 +29,7 @@ public class CityService {
     public City getOrCreateCity(String cityId) {
         return cityRepository.findById(cityId).orElseGet(() -> {
             log.info("City {} not found in database. Start fetching.", cityId);
-            CityResponse response = cityClient.fetchCityFromExternal(cityId);
+            CityMockResponse response = cityClient.fetchCityFromExternal(cityId);
             City city = City.map(cityId, response);
 
             return cityRepository.save(city);
@@ -40,10 +41,6 @@ public class CityService {
                 .stream()
                 .map(CityMapper::toDto)
                 .toList();
-    }
-
-    public List<String> getAllRegions() {
-        return cityRepository.getAllRegions();
     }
 
     public List<CityStatsResponse> getStatistics(TimeRange range) {

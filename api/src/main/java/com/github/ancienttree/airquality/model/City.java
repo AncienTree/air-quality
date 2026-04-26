@@ -1,6 +1,6 @@
 package com.github.ancienttree.airquality.model;
 
-import com.github.ancienttree.airquality.dto.CityResponse;
+import com.github.ancienttree.airquality.dto.CityMockResponse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -28,7 +28,7 @@ public class City {
     @Column(name = "region_id")
     private String regionId;
 
-    public static City map(String id, CityResponse response) {
+    public static City map(String id, CityMockResponse response) {
         City c = new City();
 
         c.id = id;
