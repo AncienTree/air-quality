@@ -29,7 +29,7 @@ def random_timestamp(range_delta):
     random_seconds = random.randint(0, int(range_delta.total_seconds()))
     
     dt = start + timedelta(seconds=random_seconds)
-    return int(dt.timestamp() * 1000)  # Convert to milliseconds
+    return int(dt.timestamp())
 
 
 # Function to generate random air quality measurements
