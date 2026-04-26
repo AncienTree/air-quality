@@ -1,11 +1,10 @@
-import { ScrollArea, Table } from '@mantine/core';
+import { Card, ScrollArea, Table, Text } from '@mantine/core';
 import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
 import type { CityStats } from '../../../types/CityStats';
 import { LoadingComponent } from '../../../components/ui/LoadingComponent';
 import { TableCityRow } from '../../../components/ui/table/TableCityRow';
 import { TableHeaderStats } from '../../../components/ui/table/TableHeader';
 import { TableMeasurementRow } from '../../../components/ui/table/TableMeasurementRow';
-import { TableRegionRow } from '../../../components/ui/table/TableRegionRow';
 import { TableActionButton } from '../../../components/ui/table/TableActionButton';
 
 type MeasurementsTableProps = {
@@ -28,9 +27,8 @@ export function MeasurementsTable({ data, isLoading, showColors = false }: Measu
       ),
     },
     {
-      accessorKey: 'region',
-      header: () => <TableHeaderStats title="Region" />,
-      cell: ({ row }) => <TableRegionRow region={row.original?.country} />,
+      accessorKey: 'country',
+      header: () => <TableHeaderStats title="Kraj" />,
     },
     {
       id: 'pm10',
@@ -67,7 +65,7 @@ export function MeasurementsTable({ data, isLoading, showColors = false }: Measu
     },
     {
       id: 'actions',
-      header: () => <TableHeaderStats title="Akcje" />,
+      header: () => <TableHeaderStats title="Akcje" align='center' />,
       cell: ({ row }) => <TableActionButton cityId={row.original?.cityId} />,
       enableResizing: false,
       size: 100,
@@ -86,31 +84,41 @@ export function MeasurementsTable({ data, isLoading, showColors = false }: Measu
 
   return (
     <ScrollArea p="md">
-      <Table highlightOnHover withTableBorder striped style={{ tableLayout: 'fixed' }}>
-        <Table.Thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <Table.Tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <Table.Th key={header.id}>
-                  {flexRender(header.column.columnDef.header, header.getContext())}
-                </Table.Th>
-              ))}
-            </Table.Tr>
-          ))}
-        </Table.Thead>
+      <Card shadow="sm" p="md" radius="md" withBorder>
+        <Table highlightOnHover withTableBorder striped style={{ tableLayout: 'fixed' }}>
+          <Table.Thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <Table.Tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <Table.Th key={header.id}>
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                  </Table.Th>
+                ))}
+              </Table.Tr>
+            ))}
+          </Table.Thead>
 
-        <Table.Tbody>
-          {table.getRowModel().rows.map((row) => (
-            <Table.Tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <Table.Td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+          <Table.Tbody>
+            {table.getRowModel().rows.map((row) => (
+              <Table.Tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <Table.Td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </Table.Td>
+                ))}
+              </Table.Tr>
+            ))}
+
+            {table.getRowModel().rows.length === 0 && !isLoading && (
+              <Table.Tr>
+                <Table.Td colSpan={columns.length} align="center">
+                  <Text color="dimmed">Brak danych do wyświetlenia</Text>
                 </Table.Td>
-              ))}
-            </Table.Tr>
-          ))}
-        </Table.Tbody>
-      </Table>
+              </Table.Tr>
+            )}
+          </Table.Tbody>
+        </Table>
+      </Card>
     </ScrollArea>
   );
 }

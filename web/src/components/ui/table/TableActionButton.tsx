@@ -1,4 +1,4 @@
-import { Button, Group } from '@mantine/core';
+import { Button, Center, Group } from '@mantine/core';
 
 export type TableActionButtonProps = {
   cityId: string;
@@ -7,13 +7,15 @@ export type TableActionButtonProps = {
 // TODO add actions
 export function TableActionButton({ cityId }: TableActionButtonProps) {
   return (
-    <Group>
-      <Button size="xs" variant="light">
-        Notatki
-      </Button>
-      <Button size="xs" variant="light">
-        Szczegóły
-      </Button>
-    </Group>
+    <Center>
+      <Group>
+        <Button size="xs" variant="light">
+          Notatki
+        </Button>
+        <Button size="xs" variant="light">
+          Szczegóły
+        </Button>
+      </Group>
+    </Center>
   );
 }

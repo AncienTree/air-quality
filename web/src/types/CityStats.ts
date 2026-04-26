@@ -11,3 +11,11 @@ export type CityStats = {
   minCO: number;
   maxCO: number;
 };
+
+export type City = {
+  id: string;
+  country: string;
+  city: string;
+  region: string;
+  regionId: string;
+};
