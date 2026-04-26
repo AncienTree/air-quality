@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -44,13 +46,12 @@ public class CityService {
         return cityRepository.getAllRegions();
     }
 
-
     public List<CityStatsResponse> getStatistics(TimeRange range) {
         log.info("Start fetching city statistics for range {}", range);
         Instant from = switch (range) {
             case H1 -> Instant.now().minus(1, ChronoUnit.HOURS);
             case H24 -> Instant.now().minus(24, ChronoUnit.HOURS);
-            case M3 -> Instant.now().minus(3, ChronoUnit.MONTHS);
+            case M3 -> ZonedDateTime.now(ZoneOffset.UTC).minusMonths(3).toInstant();
         };
         return cityRepository.getCityStatisticsByRange(from);
     }
