@@ -37,7 +37,7 @@ def random_measurement():
     return {
         "NO2": round(random.uniform(5, 120), 2),
         "CO": round(random.uniform(0.1, 10), 2),
-        "PM10": round(random.uniform(10, 200), 2),
+        "PM10": round(random.uniform(0, 200), 2),
     }
 
 

@@ -18,11 +18,7 @@ export function MeasurementsHeader({ range, onChange }: MeasurementsHeaderProps)
       <Group justify="space-between" align='center'>
         <div>
           <Text size="xl" fw={700}>
-            Measurement results
-          </Text>
-
-          <Text size="sm" fs="">
-            Detailed analysis of air quality.
+            Wyniki pomiarów
           </Text>
         </div>
 

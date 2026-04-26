@@ -4,7 +4,7 @@ export function MeasurementsToolbar() {
   return (
     <Container p="md" fluid>
       <Card withBorder radius="md" p="md">
-        <Input size="lg" placeholder="Search by city or region" variant="filled"/>
+        <Input size="lg" placeholder="Wyszukaj według miasta lub regionu" variant="filled"/>
       </Card>
     </Container>
   );

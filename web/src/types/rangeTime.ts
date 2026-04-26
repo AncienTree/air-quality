@@ -1,5 +1,5 @@
 export const RangeTime = {
-  ONE_HOUR: '1h',
-  TWENTY_FOUR_HOURS: '24h',
-  THREE_MONTHS: '3m',
+  ONE_HOUR: 'H1',
+  TWENTY_FOUR_HOURS: 'H24',
+  THREE_MONTHS: 'M3',
 };

@@ -6,8 +6,8 @@ import { useDisclosure } from '@mantine/hooks';
 import clsx from 'clsx';
 
 const links = [
-  { link: '/', label: 'Home' },
-  { link: '/measurements', label: 'Measurements' },
+  { link: '/', label: 'Strona główna' },
+  { link: '/measurements', label: 'Pomiary' },
 ];
 
 export function AppHeader() {
@@ -17,7 +17,11 @@ export function AppHeader() {
   const items = links.map((link) => {
     const isActive = location.pathname === link.link;
     return (
-      <Link key={link.label} to={link.link} className={clsx(classes.link, isActive && classes.active)}>
+      <Link
+        key={link.label}
+        to={link.link}
+        className={clsx(classes.link, isActive && classes.active)}
+      >
         {link.label}
       </Link>
     );
@@ -36,7 +40,13 @@ export function AppHeader() {
           {items}
         </Group>
 
-        <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" aria-label="Toggle navigation" />
+        <Burger
+          opened={opened}
+          onClick={toggle}
+          hiddenFrom="xs"
+          size="sm"
+          aria-label="Toggle navigation"
+        />
       </Container>
 
       <Drawer

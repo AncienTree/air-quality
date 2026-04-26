@@ -5,9 +5,10 @@ export function HomePage() {
     <Container size="md" py="xl">
       <Stack gap="lg">
         <div>
-          <Title order={1}>Air Quality Dashboard</Title>
+          <Title order={1}>Panel jakości powietrza</Title>
           <Text c="dimmed" mt="sm">
-            A simple demo project for recruitment purposes showcasing backend + frontend integration.
+            Prosty projekt demonstracyjny na potrzeby rekrutacji, prezentujący integrację backendu i
+            frontendu.
           </Text>
         </div>
 
@@ -20,36 +21,39 @@ export function HomePage() {
             </Group>
 
             <Text>
-              This application displays air quality measurements grouped by cities. It demonstrates REST API design,
-              data aggregation, and a modern React dashboard UI.
+              Ta aplikacja wyświetla pomiary jakości powietrza pogrupowane według miast. Demonstruje
+              projektowanie REST API, agregację danych oraz nowoczesny interfejs dashboardu w React.
             </Text>
 
             <Text>
-              Users can browse city-level air quality data, inspect historical measurements, and analyze pollution
-              trends (PM10, CO, NO2).
+              Użytkownicy mogą przeglądać dane dotyczące jakości powietrza na poziomie miast,
+              analizować pomiary historyczne oraz badać trendy zanieczyszczeń (PM10, CO, NO2).
             </Text>
 
             <Text>
-              Additionally, users can create and manage notes related to cities for better context and data
-              interpretation.
+              Dodatkowo użytkownicy mogą tworzyć i zarządzać notatkami powiązanymi z miastami, co
+              ułatwia kontekstualizację i interpretację danych.
             </Text>
 
-            <Text fw={500}>Navigation is available via the top navigation bar for quick access to all sections.</Text>
+            <Text fw={500}>
+              Nawigacja jest dostępna za pomocą górnego paska, zapewniając szybki dostęp do
+              wszystkich sekcji.
+            </Text>
 
             <Text>
-              Author: <b>Mateusz Dąbek</b>
+              Autor: <b>Mateusz Dąbek</b>
             </Text>
           </Stack>
         </Card>
 
         <Card shadow="sm" padding="lg" radius="md" withBorder>
-          <Title order={3}>Features</Title>
+          <Title order={3}>Funkcje</Title>
           <ul>
-            <li>View cities with latest air quality metrics</li>
-            <li>Inspect historical measurements per city</li>
-            <li>Analyze pollution trends (PM10, CO, NO2)</li>
-            <li>Create and manage notes for each city</li>
-            <li>Navigate easily using the top navigation bar</li>
+            <li>Przeglądaj miasta z najnowszymi wskaźnikami jakości powietrza</li>
+            <li>Analizuj historyczne pomiary dla każdego miasta</li>
+            <li>Badaj trendy zanieczyszczeń (PM10, CO, NO2)</li>
+            <li>Twórz i zarządzaj notatkami dla poszczególnych miast</li>
+            <li>Nawiguj łatwo za pomocą górnego paska nawigacyjnego</li>
           </ul>
         </Card>
       </Stack>
