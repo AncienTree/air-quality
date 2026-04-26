@@ -38,9 +38,9 @@ public class Measurement {
 
         m.sensorId = dto.sensorId();
         m.cityId = dto.cityId();
-        m.pm10 = dto.pm10();
-        m.co = dto.co();
-        m.no2 = dto.no2();
+        m.pm10 = dto.PM10();
+        m.co = dto.CO();
+        m.no2 = dto.NO2();
         m.measuredAt = Instant.ofEpochSecond(dto.timestamp());
 
         return m;

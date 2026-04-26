@@ -7,8 +7,8 @@ import jakarta.validation.constraints.PositiveOrZero;
 public record MeasurementRequest(
         @NotBlank String sensorId,
         @NotBlank String cityId,
-        @NotNull @PositiveOrZero Double pm10,
-        @NotNull @PositiveOrZero Double co,
-        @NotNull @PositiveOrZero Double no2,
+        @NotNull @PositiveOrZero Double PM10,
+        @NotNull @PositiveOrZero Double CO,
+        @NotNull @PositiveOrZero Double NO2,
         @NotNull Long timestamp
 ) {};
