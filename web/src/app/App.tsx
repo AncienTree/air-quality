@@ -1,3 +1,4 @@
+import { ErrorBoundary } from './ErrorBoundary';
 import { Providers } from './providers';
 import { AppRouter } from './router';
 import '@mantine/core/styles.css';
@@ -5,7 +6,9 @@ import '@mantine/core/styles.css';
 function App() {
   return (
     <Providers>
-      <AppRouter />
+      <ErrorBoundary>
+        <AppRouter />
+      </ErrorBoundary>
     </Providers>
   );
 }
