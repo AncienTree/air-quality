@@ -1,6 +1,7 @@
 package com.github.ancienttree.airquality.client;
 
 import com.github.ancienttree.airquality.dto.CityResponse;
+import com.github.ancienttree.airquality.util.CityMockUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -35,9 +36,7 @@ public class CityClient {
                 .block();
     }
 
-    // TODO Add mocking function
     private CityResponse mockResponse(String cityId) {
-        return new CityResponse("Test 1", "Test 2", "Test 3", "Test 4");
+        return CityMockUtil.mockCity(cityId);
     }
-
 }
