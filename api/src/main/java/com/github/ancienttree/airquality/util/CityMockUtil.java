@@ -6,11 +6,10 @@ import com.github.ancienttree.airquality.dto.mock.RegionData;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CityMockUtil {
-    // Mock data for regions and cities
-    private static final List<String> REGIONS = List.of("Polska", "Niemcy", "Francja", "Czechy");
-
     // Mock data for countries
     private static final List<CountryData> COUNTRIES = List.of(
             new CountryData("Polska", List.of(
@@ -74,20 +73,54 @@ public class CityMockUtil {
             ))
     );
 
+    // To prevent duplication of city
+    private static final List<String[]> ALL_CITIES =
+            COUNTRIES.stream()
+                    .flatMap(country ->
+                            country.regions().stream()
+                                    .flatMap(region ->
+                                            region.cities().stream()
+                                                    .map(city -> new String[]{
+                                                            country.name(),
+                                                            city,
+                                                            region.name(),
+                                                            region.name().toLowerCase().replace(" ", "-")
+                                                    })
+                                    )
+                    )
+                    .toList();
+
+    private static final Pattern CITY_ID_PATTERN = Pattern.compile("^city-(\\d+)$");
+
     public static CityMockResponse mockCity(String cityId) {
         Objects.requireNonNull(cityId, "City ID cannot be null");
         if (cityId.isBlank()) {
             throw new IllegalArgumentException("City ID cannot be empty");
         }
 
-        // Generate a unique hash for the cityId
-        int hash = Math.abs(cityId.hashCode());
+        int index;
+        Matcher m = CITY_ID_PATTERN.matcher(cityId.trim());
+        // If is from script generator like city-1, city-2
+        if (m.matches()) {
+            try {
+                int num = Integer.parseInt(m.group(1));
 
-        // Determine the region based on the hash
-        CountryData country = COUNTRIES.get(hash % COUNTRIES.size());
-        RegionData region = country.regions().get(hash % country.regions().size());
-        String city = region.cities().get(hash % region.cities().size());
+                // Use modulo to wrap around the list of cities
+                index = (num - 1) % ALL_CITIES.size();
+                if (index < 0) index += ALL_CITIES.size();
+            } catch (NumberFormatException e) {
+                index = Math.floorMod(cityId.hashCode(), ALL_CITIES.size());
+            }
+        } else {
+            index = Math.floorMod(cityId.hashCode(), ALL_CITIES.size());
+        }
+        String[] entry = ALL_CITIES.get(index);
 
-        return new CityMockResponse(country.name(), city, region.mame(), region.mame().toLowerCase().replace(" ", "-"));
+        return new CityMockResponse(
+                entry[0], // country
+                entry[1], // city
+                entry[2], // region
+                entry[3]  // regionId
+        );
     }
 }
