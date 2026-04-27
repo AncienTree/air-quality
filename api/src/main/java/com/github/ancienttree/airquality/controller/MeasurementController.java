@@ -4,6 +4,7 @@ package com.github.ancienttree.airquality.controller;
 import com.github.ancienttree.airquality.dto.ApiResponse;
 import com.github.ancienttree.airquality.dto.CreateMeasurementResponse;
 import com.github.ancienttree.airquality.dto.MeasurementRequest;
+import com.github.ancienttree.airquality.dto.MeasurementResponse;
 import com.github.ancienttree.airquality.service.MeasurementService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,10 +12,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/measurements")
@@ -30,5 +30,12 @@ public class MeasurementController {
         Long id = measurementService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(ApiResponse.created(new CreateMeasurementResponse(id)));
+    }
+
+    @GetMapping("{cityId}")
+    @Operation(summary = "Get measurements statistics by city id")
+    public ResponseEntity<ApiResponse<List<MeasurementResponse>>> getCityStats(@PathVariable String cityId) {
+        List<MeasurementResponse> measurements = measurementService.getMeasurements(cityId);
+        return ResponseEntity.ok(ApiResponse.ok(measurements));
     }
 }
