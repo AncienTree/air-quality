@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { City } from '../types/CityStats';
+import type { City } from '../types/cityStats';
 
 type StateCities = {
   cities: City[];

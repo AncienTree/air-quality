@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { citiesApi } from '../api/cities.api';
 
-export function useCityStats(range: string) {
+export function useCitiesStats(range: string) {
   return useQuery({
-    queryKey: ['city-stats', range],
-    queryFn: () => citiesApi.getCityStats(range),
+    queryKey: ['cities-stats', range],
+    queryFn: () => citiesApi.getCitiesStats(range),
     select: (response) => response.data,
   });
 }

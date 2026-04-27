@@ -1,6 +1,6 @@
 import { Card, ScrollArea, Table, Text } from '@mantine/core';
 import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
-import type { CityStats } from '../../../types/CityStats';
+import type { CityStats } from '../../../types/cityStats';
 import { LoadingComponent } from '../../../components/ui/LoadingComponent';
 import { TableCityRow } from '../../../components/ui/table/TableCityRow';
 import { TableHeaderStats } from '../../../components/ui/table/TableHeader';

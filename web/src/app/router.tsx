@@ -4,6 +4,8 @@ import { HomePage } from '../pages/HomePage';
 import { MeasurementsPage } from '../pages/measurements/MeasurementsPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { ErrorPage } from '../pages/ErrorPage';
+import { MeasurementDetailsPage } from '../pages/measurements/MeasurementDetailsPage';
+import { NotesPage } from '../pages/notes/NotesPage';
 
 const router = createBrowserRouter([
   {
@@ -13,6 +15,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'measurements', element: <MeasurementsPage /> },
+      { path: 'measurements/:id', element: <MeasurementDetailsPage /> },
+      { path: 'notes/:id', element: <NotesPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],
   },

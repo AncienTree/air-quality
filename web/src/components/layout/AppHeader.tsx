@@ -1,5 +1,15 @@
-import { Box, Burger, Container, Divider, Drawer, Group, ScrollArea, Text } from '@mantine/core';
-import { WindIcon } from '@phosphor-icons/react';
+import {
+  Box,
+  Burger,
+  Button,
+  Container,
+  Divider,
+  Drawer,
+  Group,
+  ScrollArea,
+  Text,
+} from '@mantine/core';
+import { ArrowLeftIcon, WindIcon } from '@phosphor-icons/react';
 import { Link, useLocation } from 'react-router-dom';
 import classes from './AppHeader.module.css';
 import { useDisclosure } from '@mantine/hooks';
@@ -13,6 +23,7 @@ const links = [
 export function AppHeader() {
   const [opened, { toggle, close }] = useDisclosure(false);
   const location = useLocation();
+  const isHome = location.pathname === '/';
 
   const items = links.map((link) => {
     const isActive = location.pathname === link.link;
@@ -31,6 +42,17 @@ export function AppHeader() {
     <header className={classes.header}>
       <Container fluid className={classes.inner}>
         <Box className={classes.divRow}>
+          {!isHome && (
+            <Button
+              component={Link}
+              to="/"
+              variant="subtle"
+              color="gray"
+              size="sm"
+              radius="md"
+              leftSection={<ArrowLeftIcon size={18} />}
+            />
+          )}
           <WindIcon size={28} />
           <Text size="xl" fw={600} ml="xs">
             Air Quality Simple App
