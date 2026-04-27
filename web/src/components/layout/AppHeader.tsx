@@ -24,6 +24,8 @@ export function AppHeader() {
   const [opened, { toggle, close }] = useDisclosure(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const isCityPage =
+    location.pathname.startsWith('/measurements/') || location.pathname.startsWith('/notes/');
 
   const items = links.map((link) => {
     const isActive = location.pathname === link.link;
@@ -45,7 +47,7 @@ export function AppHeader() {
           {!isHome && (
             <Button
               component={Link}
-              to="/"
+              to={isCityPage ? '/measurements' : '/'}
               variant="subtle"
               color="gray"
               size="sm"
