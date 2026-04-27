@@ -1,4 +1,4 @@
-export type CityStats = {
+export type CityAvgStats = {
   cityId: string;
   country: string;
   avgNO2: number;
@@ -10,6 +10,14 @@ export type CityStats = {
   avgCO: number;
   minCO: number;
   maxCO: number;
+};
+
+export type CityStats = {
+  cityId: string;
+  PM10: number;
+  CO: number;
+  NO2: number;
+  timestamp: number;
 };
 
 export type City = {

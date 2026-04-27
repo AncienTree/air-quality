@@ -3,7 +3,7 @@ import { MeasurementsHeader } from './components/MeasurementsHeader';
 import { MeasurementsTable } from './components/MeasurementsTable';
 import { MeasurementsToolbar } from './components/MeasurementsToolbar';
 import { RangeTime } from '../../types/rangeTime';
-import { useCitiesStats } from '../../hooks/useCityStats';
+import { useCitiesStats } from '../../hooks/useCitiesStats';
 import { useCities } from '../../hooks/useCities';
 import { useStatsStore } from '../../stores/useStatsStore';
 

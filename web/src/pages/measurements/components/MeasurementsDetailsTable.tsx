@@ -1,72 +1,56 @@
 import { Box, Card, ScrollArea, Table, Text } from '@mantine/core';
 import { flexRender, getCoreRowModel, useReactTable, type ColumnDef } from '@tanstack/react-table';
-import type { CityAvgStats } from '../../../types/cityStats';
+import type { City, CityStats } from '../../../types/cityStats';
 import { LoadingComponent } from '../../../components/ui/LoadingComponent';
 import { TableCityRow } from '../../../components/ui/table/TableCityRow';
 import { TableHeaderStats } from '../../../components/ui/table/TableHeader';
 import { TableMeasurementRow } from '../../../components/ui/table/TableMeasurementRow';
-import { TableActionButton } from '../../../components/ui/table/TableActionButton';
+import { TableTimestampRow } from '../../../components/ui/table/TableTimestampRow';
 
 type MeasurementsTableProps = {
-  data: CityAvgStats[];
+  data: CityStats[];
+  city: City | undefined;
   isLoading: boolean;
 };
 
-export function MeasurementsTable({ data, isLoading }: MeasurementsTableProps) {
-  const columns: ColumnDef<CityAvgStats>[] = [
+export function MeasurementsDetailsTable({ data, city, isLoading }: MeasurementsTableProps) {
+  const columns: ColumnDef<CityStats>[] = [
     {
       accessorKey: 'city',
       header: () => <TableHeaderStats title="Miasto" />,
       cell: ({ row }) => (
-        <TableCityRow
-          city={row.original?.cityId}
-          pm10={row.original?.avgPM10}
-        />
+        <TableCityRow city={row.original?.cityId} pm10={row.original?.PM10} showColors />
       ),
     },
     {
       accessorKey: 'country',
       header: () => <TableHeaderStats title="Kraj" />,
+      cell: () => <Text>{city?.country ?? 'UNK'}</Text>,
+    },
+    {
+      accessorKey: 'region',
+      header: () => <TableHeaderStats title="Region" />,
+      cell: () => <Text>{city?.region ?? 'UNK'}</Text>,
     },
     {
       id: 'pm10',
-      header: () => <TableHeaderStats title="PM10" subtitle="śr. / min / max" />,
-      cell: ({ row }) => (
-        <TableMeasurementRow
-          avgScore={row.original?.avgPM10}
-          minScore={row.original?.minPM10}
-          maxScore={row?.original?.maxPM10}
-        />
-      ),
+      header: () => <TableHeaderStats title="PM10" />,
+      cell: ({ row }) => <TableMeasurementRow avgScore={row.original?.PM10} />,
     },
     {
       id: 'co',
-      header: () => <TableHeaderStats title="CO" subtitle="śr. / min / max" />,
-      cell: ({ row }) => (
-        <TableMeasurementRow
-          avgScore={row.original?.avgCO}
-          minScore={row.original?.minCO}
-          maxScore={row?.original?.minCO}
-        />
-      ),
+      header: () => <TableHeaderStats title="CO" />,
+      cell: ({ row }) => <TableMeasurementRow avgScore={row.original?.CO} />,
     },
     {
       id: 'no2',
-      header: () => <TableHeaderStats title="NO2" subtitle="śr. / min / max" />,
-      cell: ({ row }) => (
-        <TableMeasurementRow
-          avgScore={row.original?.avgNO2}
-          minScore={row.original?.minNO2}
-          maxScore={row?.original?.maxNO2}
-        />
-      ),
+      header: () => <TableHeaderStats title="NO2" />,
+      cell: ({ row }) => <TableMeasurementRow avgScore={row.original?.NO2} />,
     },
     {
-      id: 'actions',
-      header: () => <TableHeaderStats title="Akcje" align="center" />,
-      cell: ({ row }) => <TableActionButton cityId={row.original?.cityId} />,
-      enableResizing: false,
-      size: 100,
+      id: 'timestamp',
+      header: () => <TableHeaderStats title="Data rekordu" />,
+      cell: ({ row }) => <TableTimestampRow timestamp={row.original?.timestamp} />,
     },
   ];
 

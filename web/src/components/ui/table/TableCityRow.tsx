@@ -6,7 +6,7 @@ import { useMemo } from 'react';
 type TableCityRowProps = {
   city: string;
   pm10: number;
-  showColors: boolean;
+  showColors?: boolean;
 };
 
 export function TableCityRow({ city, pm10, showColors = false }: TableCityRowProps) {
