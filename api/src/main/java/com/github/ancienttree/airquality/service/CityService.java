@@ -43,13 +43,20 @@ public class CityService {
                 .toList();
     }
 
-    public List<CityStatsResponse> getStatistics(TimeRange range) {
+    public List<CityStatsResponse> getStatistics(TimeRange range, String search) {
         log.info("Start fetching city statistics for range {}", range);
-        Instant from = switch (range) {
+        Instant from = getFrom(range);
+        if (search == null || search.isBlank()) {
+            return cityRepository.getCityStatisticsByRange(from);
+        }
+        return cityRepository.getCityStatisticsByRangeAndSearch(from, search.toLowerCase());
+    }
+
+    private Instant getFrom(TimeRange range) {
+        return switch (range) {
             case H1 -> Instant.now().minus(1, ChronoUnit.HOURS);
             case H24 -> Instant.now().minus(24, ChronoUnit.HOURS);
             case M3 -> ZonedDateTime.now(ZoneOffset.UTC).minusMonths(3).toInstant();
         };
-        return cityRepository.getCityStatisticsByRange(from);
     }
 }

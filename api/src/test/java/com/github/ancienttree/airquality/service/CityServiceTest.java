@@ -30,7 +30,7 @@ public class CityServiceTest {
                 .thenReturn(List.of());
 
         // When
-        var result = cityService.getStatistics(TimeRange.H24);
+        var result = cityService.getStatistics(TimeRange.H24, null);
 
         // Then
         assertThat(result).isEmpty();
@@ -52,7 +52,7 @@ public class CityServiceTest {
                 .thenReturn(mockData);
 
         // When
-        var result = cityService.getStatistics(TimeRange.H1);
+        var result = cityService.getStatistics(TimeRange.H1, null);
 
         // Then
         assertThat(result).hasSize(1);

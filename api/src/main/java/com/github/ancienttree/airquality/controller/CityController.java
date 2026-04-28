@@ -31,8 +31,10 @@ public class CityController {
 
     @GetMapping("/stats/{range}")
     @Operation(summary = "Get city statistics for given time range")
-    public ResponseEntity<ApiResponse<List<CityStatsResponse>>> getCityStatistic(@PathVariable TimeRange range) {
-        List<CityStatsResponse> stats = cityService.getStatistics(range);
+    public ResponseEntity<ApiResponse<List<CityStatsResponse>>> getCityStatistic(
+            @PathVariable TimeRange range,
+            @RequestParam(required = false) String search) {
+        List<CityStatsResponse> stats = cityService.getStatistics(range, search);
         return ResponseEntity.ok(ApiResponse.ok(stats));
     }
 }
