@@ -35,19 +35,25 @@ Generator → Backend (Spring Boot) → PostgreSQL → REST API → Frontend (Re
 
 ## API
 ### Statystyki miast
+```http
 GET /api/cities/stats/{range}?search=
+```
 - `range`: H1, H24, 3M
 - `search`: opcjonalny (nazwa miasta lub kraju)
 
 ### Pomiary dla miasta
+```http
 GET /api/measurements/{cityId}?range=H24
+```
 Zwraca dane pomiarowe w czasie (time-series).
 
 ### Notatki
-GET    /api/notes/{cityId}  
-POST   /api/notes/{cityId}  
-PUT    /api/notes/{noteId}  
+```http
+GET    /api/notes/{cityId}
+POST   /api/notes/{cityId}
+PUT    /api/notes/{noteId}
 DELETE /api/notes/{noteId}
+```
 
 ## Generator danych
 Aplikacja zawiera generator symulujący dane jakości powietrza.
