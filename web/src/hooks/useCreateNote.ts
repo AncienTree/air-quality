@@ -3,7 +3,7 @@ import type { NoteUpdate } from '../types/note';
 import { notesApi } from '../api/notes.api';
 import { notifications } from '@mantine/notifications';
 
-export function useCrateNote(cityId: string) {
+export function useCreateNote(cityId: string) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -21,9 +21,9 @@ export function useCrateNote(cityId: string) {
       console.error('Error creating note:', error);
 
       notifications.show({
-        title: 'Sukces',
-        message: 'Notatka została dodana',
-        color: 'green',
+        title: 'Błąd',
+        message: 'Nie udało się dodać notatki',
+        color: 'red',
       });
     },
   });

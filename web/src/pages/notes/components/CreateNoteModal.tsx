@@ -1,7 +1,7 @@
 import { Button, Modal, Stack, Textarea, TextInput } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
-import { useCrateNote } from '../../../hooks/useCreateNote';
+import { useCreateNote } from '../../../hooks/useCreateNote';
 import { useUpdateNote } from '../../../hooks/useUpdateNote';
 import type { Note } from '../../../types/note';
 import { useEffect } from 'react';
@@ -15,7 +15,7 @@ type CreateNoteModalProps = {
 export function CreateNoteModal({ cityId, note, isEdit = false }: CreateNoteModalProps) {
   const [opened, { open, close }] = useDisclosure(false);
 
-  const { isPending: isPendingSave, mutate: create } = useCrateNote(cityId);
+  const { isPending: isPendingSave, mutate: create } = useCreateNote(cityId);
   const { isPending: isPendingUpdate, mutate: update } = useUpdateNote(cityId);
 
   const form = useForm({
