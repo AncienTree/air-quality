@@ -1,4 +1,4 @@
-import { Box, Card, Center, Group, Text, Title } from '@mantine/core';
+import { Card, Center, Group, Stack, Text, Title } from '@mantine/core';
 import { useParams } from 'react-router-dom';
 import { useStatsStore } from '../../stores/useStatsStore';
 import { useMemo } from 'react';
@@ -14,7 +14,7 @@ export function MeasurementDetailsPage() {
   const cityData = useMemo(() => cities?.find((c) => c.id === id), [cities, id]);
 
   return (
-    <Box p="md">
+    <Stack p="md">
       <Card shadow="sm" padding="lg" radius="md" withBorder style={{ width: '100%' }}>
         <Group justify="space-between">
           <Title>Szczegółowe pomiary dla miasta {cityData?.city}</Title>
@@ -30,6 +30,6 @@ export function MeasurementDetailsPage() {
 
         {!isError && <MeasurementsDetailsTable data={data?.data} isLoading={isLoading} city={cityData} />}
       </>
-    </Box>
+    </Stack>
   );
 }
